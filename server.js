@@ -57,6 +57,23 @@ app.post('/todos',function(req,res){
 
 
 });
+
+app.delete('/todos/:id',function(req,res){
+	var todoId = parseInt(req.params.id);
+	var matchedTodo = _.findWhere(todos,{id:todoId});
+
+	if(!matchedTodo){		
+			res.send('id does not exist');
+			res.status(404).send();
+	}else{
+			
+		 todos = _.without(todos,matchedTodo);
+		 res.json(matchedTodo);
+		 
+	
+	}
+	
+})
 // var todos = [];
 
 app.listen(PORT, function(){
