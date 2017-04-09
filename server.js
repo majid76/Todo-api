@@ -45,13 +45,19 @@ app.get('/todos/:id',function(req,res){
 
 app.post('/todos',function(req,res){
 	var body = req.body;
-	body.id = todoNextId++;
-	todos.push(body);
+	var obj = _.pick(body,'description','completed');
+	if(!_.isBoolean(obj.completed) || !_.isString(obj.description) || obj.description.trim().length === 0){
+		return res.status(400).send();
+	}
+	obj.id = todoNextId++;
+	obj.description = obj.description.trim();
+	todos.push(obj);
 	console.log('description: '+ body.description );
 	res.json(todos);
 
-});
 
+});
+// var todos = [];
 
 app.listen(PORT, function(){
 	console.log('Express listening on port: '+PORT);
