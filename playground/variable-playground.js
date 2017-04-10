@@ -22,6 +22,7 @@ function addGrade(grades){
 
 	// grades.push(55);
 	grades = [12,33,99];
+	debugger;
 
 }
 
